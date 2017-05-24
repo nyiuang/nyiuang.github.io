@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="学习笔记,haha," />
+  <meta name="keywords" content="学习笔记," />
 
 
 
@@ -88,13 +88,13 @@
 
 
 <meta name="description" content="Symbol定义Symbol是一种新的数据类型，表示独一无二的值。 用法基本用法Symbol值通过Symbol函数生成。123var s = Symbol();console.log(typeof s);// symbol Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述。主要功能是为了在控制台显示或者转为字符串时可以区分。12345var s = Symbol(&apos;abc&apos;">
-<meta name="keywords" content="学习笔记,haha">
+<meta name="keywords" content="学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6学习笔记(2) - Symbol">
 <meta property="og:url" content="http://yoursite.com/2017/05/24/ES6学习笔记(2)-Symbol/index.html">
 <meta property="og:site_name" content="刘洋的百宝袋">
 <meta property="og:description" content="Symbol定义Symbol是一种新的数据类型，表示独一无二的值。 用法基本用法Symbol值通过Symbol函数生成。123var s = Symbol();console.log(typeof s);// symbol Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述。主要功能是为了在控制台显示或者转为字符串时可以区分。12345var s = Symbol(&apos;abc&apos;">
-<meta property="og:updated_time" content="2017-05-24T18:21:01.000Z">
+<meta property="og:updated_time" content="2017-05-24T18:32:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6学习笔记(2) - Symbol">
 <meta name="twitter:description" content="Symbol定义Symbol是一种新的数据类型，表示独一无二的值。 用法基本用法Symbol值通过Symbol函数生成。123var s = Symbol();console.log(typeof s);// symbol Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述。主要功能是为了在控制台显示或者转为字符串时可以区分。12345var s = Symbol(&apos;abc&apos;">
@@ -114,9 +114,9 @@
       author: '博主'
     },
     algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
+      applicationID: '356D8ODOB0',
+      apiKey: '1617cd71b36926d0635f66e3bd79f841',
+      indexName: 'indexName',
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
@@ -233,9 +233,47 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
   
 </nav>
 
@@ -388,8 +426,6 @@
           
             <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
           
-            <a href="/tags/haha/" rel="tag"># haha</a>
-          
         </div>
       
 
@@ -494,7 +530,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -697,6 +733,19 @@
   
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.1"></script>
 
 
 
