@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="学习笔记," />
 
 
 
@@ -90,16 +90,17 @@
 
 
 
-<meta name="description" content="乘风破浪 风雨无阻">
+<meta name="description" content="Symbol定义Symbol是一种新的数据类型，表示独一无二的值。 用法基本用法Symbol值通过Symbol函数生成。123var s = Symbol();console.log(typeof s);// symbol Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述。主要功能是为了在控制台显示或者转为字符串时可以区分。12345var s = Symbol(&apos;abc&apos;">
+<meta name="keywords" content="学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6学习笔记（2）">
 <meta property="og:url" content="http://yoursite.com/2017/05/24/ES6学习笔记(2)-Symbol/index.html">
 <meta property="og:site_name" content="刘洋的百宝袋">
-<meta property="og:description" content="乘风破浪 风雨无阻">
-<meta property="og:updated_time" content="2017-05-24T15:16:03.000Z">
+<meta property="og:description" content="Symbol定义Symbol是一种新的数据类型，表示独一无二的值。 用法基本用法Symbol值通过Symbol函数生成。123var s = Symbol();console.log(typeof s);// symbol Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述。主要功能是为了在控制台显示或者转为字符串时可以区分。12345var s = Symbol(&apos;abc&apos;">
+<meta property="og:updated_time" content="2017-05-24T16:33:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6学习笔记（2）">
-<meta name="twitter:description" content="乘风破浪 风雨无阻">
+<meta name="twitter:description" content="Symbol定义Symbol是一种新的数据类型，表示独一无二的值。 用法基本用法Symbol值通过Symbol函数生成。123var s = Symbol();console.log(typeof s);// symbol Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述。主要功能是为了在控制台显示或者转为字符串时可以区分。12345var s = Symbol(&apos;abc&apos;">
 
 
 
@@ -338,7 +339,21 @@
       
 
       
-        
+        <h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>Symbol是一种新的数据类型，表示独一无二的值。</p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p>Symbol值通过Symbol函数生成。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s = <span class="built_in">Symbol</span>();</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> s);</div><div class="line"><span class="comment">// symbol</span></div></pre></td></tr></table></figure></p>
+<p>Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述。<br>主要功能是为了在控制台显示或者转为字符串时可以区分。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s = <span class="built_in">Symbol</span>(<span class="string">'abc'</span>);</div><div class="line"><span class="built_in">console</span>.log(s);</div><div class="line"><span class="built_in">console</span>.log(s.toString());</div><div class="line"><span class="comment">// Symbol(abc)</span></div><div class="line"><span class="comment">// "Symbol(abc)"</span></div></pre></td></tr></table></figure></p>
+<p>如果Symbol函数接收的参数是一个对象，则会调用对象的toString方法，转为字符串，然后再生成Symbol值。</p>
+<p>Symbol值可以调用toString（）方法，转为字符串。<br>Symbol值可以转为布尔值，但是不能转为数值。</p>
+<h4 id="Symbol值用作属性名"><a href="#Symbol值用作属性名" class="headerlink" title="Symbol值用作属性名"></a>Symbol值用作属性名</h4><p>因为每个Symbol值都是不想等的，所以Symbol值用作对象的属性名，可以保证不会重名。这样可以防止对象的键值被改写或覆盖。<br>写法一般用方括号结构，注意不能用点运算符。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s1 = <span class="built_in">Symbol</span>(<span class="string">'s1'</span>);</div><div class="line"><span class="keyword">var</span> s2 = <span class="built_in">Symbol</span>(<span class="string">'s2'</span>);</div><div class="line"><span class="keyword">var</span> a = &#123;</div><div class="line">    [s1]: <span class="number">1</span></div><div class="line">&#125;;</div><div class="line">a[s2] = <span class="number">2</span>;</div></pre></td></tr></table></figure></p>
+<p>Symbol值作为对象属性名时，不能被<em>for…in</em>或<em>for…of</em>遍历到。<br>但是它是公开属性，不是私有属性。<br>获取Symbol键名的方法：<br><strong>1. Object.getOwnPropertySymbols()</strong><br>可以通过Object.getOwnPropertySymbols方法，获取指定对象的所有Symbol属性名。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="built_in">Symbol</span>(<span class="string">'a'</span>)</div><div class="line"><span class="keyword">var</span> b = <span class="built_in">Symbol</span>(<span class="string">'b'</span>)</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    [a]: <span class="string">'a1'</span>,</div><div class="line">    [b]: <span class="string">'b1'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> symbols = <span class="built_in">Object</span>.getOwnPropertySymbols(obj);</div><div class="line"><span class="built_in">console</span>.log(symbols);</div><div class="line"></div><div class="line"><span class="comment">// [Symbol(a), Symbol(b)]</span></div></pre></td></tr></table></figure></p>
+<p>该方法返回一个包含所有Symbol属性名的数组。<br><strong>2. Reflect.ownKeys()</strong><br>Reflect.ownKeys()方法可以返回所有类型的键名，包括常规键名和Symbol键名。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="built_in">Symbol</span>(<span class="string">'a'</span>)</div><div class="line"><span class="keyword">var</span> b = <span class="built_in">Symbol</span>(<span class="string">'b'</span>)</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">    [a]: <span class="string">'a1'</span>,</div><div class="line">    [b]: <span class="string">'b1'</span>,</div><div class="line">    <span class="string">'c'</span>: <span class="string">'c1'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> keys = <span class="built_in">Reflect</span>.ownKeys(obj);</div><div class="line"><span class="built_in">console</span>.log(keys);</div><div class="line"></div><div class="line"><span class="comment">// ["c", Symbol(a), Symbol(b)]</span></div></pre></td></tr></table></figure></p>
+<h4 id="Symbol值用作常量"><a href="#Symbol值用作常量" class="headerlink" title="Symbol值用作常量"></a>Symbol值用作常量</h4><p>Symbol值用作常量的好处在于，它是独一无二的值，任何其他值与它都不相等。这样可以用于只需要区分多个值，而不需要指定具体值为多少的情况。<br>实例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> colorObj = &#123;</div><div class="line">    <span class="attr">red</span>: <span class="built_in">Symbol</span>(),</div><div class="line">    <span class="attr">yellow</span>: <span class="built_in">Symbol</span>()</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkColor</span>(<span class="params">color</span>)</span>&#123;</div><div class="line">    <span class="keyword">switch</span> (color)&#123;</div><div class="line">        <span class="keyword">case</span> colorObj.red:</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        <span class="keyword">case</span> colorObj.yellow:</div><div class="line">            <span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> result = checkColor(colorObj.red);</div><div class="line"><span class="built_in">console</span>.log(result);</div><div class="line"><span class="comment">//1</span></div></pre></td></tr></table></figure></p>
+<h3 id="Symbol-for-和Symbol-keyFor"><a href="#Symbol-for-和Symbol-keyFor" class="headerlink" title="Symbol.for()和Symbol.keyFor()"></a>Symbol.for()和Symbol.keyFor()</h3><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>Symbol函数前不能用new命令，否则会报错。因为生成的Symbol是一个原始类型的值，不是对象。</li>
+<li>Symbol函数的参数只表示对当前Symbol值的描述，因此相同参数的Symbol函数的返回值是不一样的。</li>
+<li>Symbol值不能和其他类型的值进行计算，会报错。</li>
+</ul>
+
       
     </div>
 
@@ -364,6 +379,12 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+        </div>
       
 
       
@@ -429,8 +450,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -492,6 +522,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Symbol"><span class="nav-number">1.</span> <span class="nav-text">Symbol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用法"><span class="nav-number">1.2.</span> <span class="nav-text">用法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本用法"><span class="nav-number">1.2.1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Symbol值用作属性名"><span class="nav-number">1.2.2.</span> <span class="nav-text">Symbol值用作属性名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Symbol值用作常量"><span class="nav-number">1.2.3.</span> <span class="nav-text">Symbol值用作常量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Symbol-for-和Symbol-keyFor"><span class="nav-number">1.3.</span> <span class="nav-text">Symbol.for()和Symbol.keyFor()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">1.4.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
