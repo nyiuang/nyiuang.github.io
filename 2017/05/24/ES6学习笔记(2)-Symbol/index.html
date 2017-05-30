@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="Symbol定义Symbol是一种新的数据类型，表示独一无二的值。 用法基本用法Symbol值通过Symbol函数生成。123var s = Symbol();console.log(typeof s);// symbol Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述。主要功能是为了在控制台显示或者转为字符串时可以区分。12345var s = Symbol(&apos;abc&apos;">
+<meta name="description" content="Symbol定义Symbol是一种新的数据类型，表示独一无二的值。">
 <meta name="keywords" content="学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6学习笔记(2) - Symbol">
 <meta property="og:url" content="https://nyiuang.github.io/2017/05/24/ES6学习笔记(2)-Symbol/index.html">
 <meta property="og:site_name" content="牛牛在中国">
-<meta property="og:description" content="Symbol定义Symbol是一种新的数据类型，表示独一无二的值。 用法基本用法Symbol值通过Symbol函数生成。123var s = Symbol();console.log(typeof s);// symbol Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述。主要功能是为了在控制台显示或者转为字符串时可以区分。12345var s = Symbol(&apos;abc&apos;">
-<meta property="og:updated_time" content="2017-05-26T16:36:18.000Z">
+<meta property="og:description" content="Symbol定义Symbol是一种新的数据类型，表示独一无二的值。">
+<meta property="og:updated_time" content="2017-05-30T17:00:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6学习笔记(2) - Symbol">
-<meta name="twitter:description" content="Symbol定义Symbol是一种新的数据类型，表示独一无二的值。 用法基本用法Symbol值通过Symbol函数生成。123var s = Symbol();console.log(typeof s);// symbol Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述。主要功能是为了在控制台显示或者转为字符串时可以区分。12345var s = Symbol(&apos;abc&apos;">
+<meta name="twitter:description" content="Symbol定义Symbol是一种新的数据类型，表示独一无二的值。">
 
 
 
@@ -382,6 +382,7 @@
 
       
         <h2 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>Symbol是一种新的数据类型，表示独一无二的值。</p>
+<a id="more"></a>
 <h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p>Symbol值通过Symbol函数生成。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s = <span class="built_in">Symbol</span>();</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> s);</div><div class="line"><span class="comment">// symbol</span></div></pre></td></tr></table></figure></p>
 <p>Symbol函数可以接收一个字符串作为参数，表示对Symbol实例的描述。<br>主要功能是为了在控制台显示或者转为字符串时可以区分。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s = <span class="built_in">Symbol</span>(<span class="string">'abc'</span>);</div><div class="line"><span class="built_in">console</span>.log(s);</div><div class="line"><span class="built_in">console</span>.log(s.toString());</div><div class="line"><span class="comment">// Symbol(abc)</span></div><div class="line"><span class="comment">// "Symbol(abc)"</span></div></pre></td></tr></table></figure></p>
 <p>如果Symbol函数接收的参数是一个对象，则会调用对象的toString方法，转为字符串，然后再生成Symbol值。</p>
