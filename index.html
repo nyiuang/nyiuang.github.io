@@ -386,7 +386,63 @@
       
         
           
-            <h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2>
+            <h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>Set是一种新的数据结构，类似于数组，但是他的成员的值都是唯一的，也就是没有重复的值。</p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><ol>
+<li><p>Set接收一个数组（或类数组对象）作为参数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</div></pre></td></tr></table></figure>
+</li>
+<li><p>Set初始化时会自动去重。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>]);</div><div class="line"><span class="built_in">console</span>.log(s.size)</div><div class="line"><span class="comment">// 3</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>可以利用Set的特性去做去重。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>];</div><div class="line"><span class="keyword">var</span> s = [...new <span class="built_in">Set</span>(arr)];</div><div class="line"><span class="built_in">console</span>.log(s);</div><div class="line"><span class="comment">// [1, 2, 3]</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>Set的实例有add方法，表示向Set中添加新成员，如果成员值已存在，则不添加。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</div><div class="line">s.add(<span class="number">4</span>);</div><div class="line"><span class="built_in">console</span>.log(s.size);</div><div class="line"><span class="comment">// 4</span></div><div class="line">s.add(<span class="number">2</span>);</div><div class="line"><span class="built_in">console</span>.log(s.size);</div><div class="line"><span class="comment">// 4</span></div></pre></td></tr></table></figure>
+<p>注意：Set加入的值不会进行类型转换再做比较，比较方式类似于“===”，区别是它判断NaN等于自身。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>();</div><div class="line">s.add(<span class="literal">NaN</span>);</div><div class="line">s.add(<span class="literal">NaN</span>);</div><div class="line"><span class="built_in">console</span>.log(s);</div><div class="line"><span class="comment">// Set(NaN)</span></div></pre></td></tr></table></figure>
+<p>两个对象总是不想等。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>();</div><div class="line">s.add(&#123;&#125;);</div><div class="line">s.add(&#123;&#125;);</div><div class="line"><span class="built_in">console</span>.log(s.size);</div><div class="line"><span class="comment">// 2</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="实例的属性和方法"><a href="#实例的属性和方法" class="headerlink" title="实例的属性和方法"></a>实例的属性和方法</h3><h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><ul>
+<li>Set.prototype.constructor: 构造函数，默认是Set函数</li>
+<li>Set.prototype.size: 返回Set实例的成员总数</li>
+</ul>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><ol>
+<li><p>操作方法</p>
+<ul>
+<li>add(value) : 添加值，返回Set实例本身。</li>
+<li>delete(value) : 删除值, 返回Boolean值，表示删除是否成功。</li>
+<li>has(value) : 返回Boolean值，表示该值是否是Set实例的成员。</li>
+<li>clear() : 清除所有值，没有返回值。</li>
+</ul>
+</li>
+<li><p>遍历方法</p>
+<ul>
+<li>keys() : 返回键名的遍历器。</li>
+<li>values() : 返回键值的遍历器。</li>
+<li>entries() : 返回键值对的遍历器。</li>
+<li>forEach() : 使用回调函数遍历每个成员。回调函数的参数可以接收三个参数，分别是键值，键名和集合本身。forEach方法可以接收第二个参数，表示绑定的this对象。</li>
+</ul>
+</li>
+<li><p>注意</p>
+<ol>
+<li>Set的遍历顺序与加入Set的顺序一致。</li>
+<li>因为Set只有键值没有键名，所以keys与values的方法行为一致，都是返回成员值。</li>
+<li>可以直接使用for…of遍历Set。</li>
+</ol>
+</li>
+<li><p>应用</p>
+<p>可以实现集合的交并补差集。</p>
+</li>
+</ol>
+<h2 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>WeakSet与Set结构类似，也是不重复值的集合。</p>
+<p>WeakSet的成员只能是对象。</p>
+<p>WeakSet中的对象都是弱引用，即垃圾回收机制不考虑WeakSet对该对象的引用。</p>
+<p>WeakSet不可遍历，没有size属性。</p>
+<p>WeakSet有三个方法：add(), delete(), has()。</p>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2>
           
         
       
