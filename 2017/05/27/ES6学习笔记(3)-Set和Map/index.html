@@ -94,7 +94,7 @@
 <meta property="og:url" content="https://nyiuang.github.io/2017/05/27/ES6学习笔记(3)-Set和Map/index.html">
 <meta property="og:site_name" content="牛牛在中国">
 <meta property="og:description" content="Set定义Set是一种新的数据结构，类似于数组，但是他的成员的值都是唯一的，也就是没有重复的值。">
-<meta property="og:updated_time" content="2017-05-31T07:57:12.000Z">
+<meta property="og:updated_time" content="2017-06-01T15:19:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6学习笔记(3) - Set和Map">
 <meta name="twitter:description" content="Set定义Set是一种新的数据结构，类似于数组，但是他的成员的值都是唯一的，也就是没有重复的值。">
@@ -438,7 +438,59 @@
 <p>WeakSet中的对象都是弱引用，即垃圾回收机制不考虑WeakSet对该对象的引用。</p>
 <p>WeakSet不可遍历，没有size属性。</p>
 <p>WeakSet有三个方法：add(), delete(), has()。</p>
-<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h2 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h2>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><p>Map的数据结构类似于对象，区别在于Map的键值不限于字符串，可以是任意类型的值。</p>
+<h3 id="用法-1"><a href="#用法-1" class="headerlink" title="用法"></a>用法</h3><p>Map构造函数可以接收数组（或类数组对象）作为参数，数组的成员是一个个表示键值对的数组。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;<span class="attr">age</span>: <span class="number">1</span>&#125;</div><div class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>([</div><div class="line">  [<span class="string">'name'</span>, <span class="string">'nick'</span>],</div><div class="line">  [obj, <span class="number">12</span>]</div><div class="line">]);</div><div class="line"><span class="built_in">console</span>.log(m.get(<span class="string">'name'</span>));</div><div class="line"><span class="comment">//nick</span></div><div class="line"><span class="built_in">console</span>.log(m.get(obj));</div><div class="line"><span class="comment">//12</span></div></pre></td></tr></table></figure>
+<p>任何具有Iterator接口的数据结构都可以当作Map构造函数的参数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s = <span class="keyword">new</span> <span class="built_in">Set</span>([</div><div class="line">  [<span class="string">'name'</span>, <span class="string">'nick'</span>],</div><div class="line">  [<span class="string">'age'</span>, <span class="number">12</span>]</div><div class="line">]);</div><div class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>(s);</div><div class="line"><span class="built_in">console</span>.log(m.get(<span class="string">'name'</span>))</div><div class="line"><span class="comment">//nick</span></div></pre></td></tr></table></figure>
+<p>如果对同一个键名多次赋值，后面的赋值会覆盖前面的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>();</div><div class="line">m.set(<span class="string">'name'</span>, <span class="string">'nick'</span>)</div><div class="line"> .set(<span class="string">'name'</span>, <span class="string">'henry'</span>);</div><div class="line"><span class="built_in">console</span>.log(m.get(<span class="string">'name'</span>));</div><div class="line"><span class="comment">// henry</span></div></pre></td></tr></table></figure>
+<p>如果读取一个未知的值，则返回undefined。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>();</div><div class="line"><span class="built_in">console</span>.log(m.get(<span class="string">'name'</span>));</div><div class="line"><span class="comment">// undefined</span></div></pre></td></tr></table></figure>
+<p>Map的键名是和内存地址绑定的，只要内存地址不一样，则视为两个不同的键名。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>();</div><div class="line"><span class="keyword">var</span> arr1 = [<span class="number">1</span>];</div><div class="line"><span class="keyword">var</span> arr2 = [<span class="number">1</span>];</div><div class="line">m.set(arr1, <span class="string">'1'</span>)</div><div class="line"> .set(arr2, <span class="string">'2'</span>);</div><div class="line"><span class="built_in">console</span>.log(m.get(arr1));</div><div class="line"><span class="comment">//1</span></div><div class="line"><span class="built_in">console</span>.log(m.get(arr2));</div><div class="line"><span class="comment">//2</span></div></pre></td></tr></table></figure>
+<h3 id="实例的属性和方法-1"><a href="#实例的属性和方法-1" class="headerlink" title="实例的属性和方法"></a>实例的属性和方法</h3><ol>
+<li><p>size属性</p>
+<p>size属性返回Map结构的成员总数。</p>
+</li>
+<li><p>set(key, value)</p>
+<p>set方法设置键名对应的键值，然后返回整个Map结构。如果key已经有值，则键值会被覆盖。</p>
+</li>
+<li><p>get(key)</p>
+<p>get方法返回key对应的键值，如果没有则返回undefined。</p>
+</li>
+<li><p>has(key)</p>
+<p>has方法返回一个Boolean值，表示是否存在这个key值。</p>
+</li>
+<li><p>delete(key)</p>
+<p>delete方法删除某个键，返回true。如果删除失败，返回false。</p>
+</li>
+<li><p>clear()</p>
+<p>clear方法清除所有成员，没有返回值。</p>
+</li>
+</ol>
+<h3 id="遍历方法"><a href="#遍历方法" class="headerlink" title="遍历方法"></a>遍历方法</h3><ol>
+<li><p>keys()：返回键名的遍历器</p>
+</li>
+<li><p>values()：返回键值的遍历器</p>
+</li>
+<li><p>entries()：返回键值对的遍历器</p>
+</li>
+<li><p>forEach()：遍历Map的所有成员</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>([</div><div class="line">  [<span class="string">'name'</span>, <span class="string">'nick'</span>],</div><div class="line">  [<span class="string">'age'</span>, <span class="number">12</span>]</div><div class="line">]);</div><div class="line">m.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">key, value, map</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(key, value);</div><div class="line">&#125;)</div><div class="line"><span class="comment">// name, nick</span></div><div class="line"><span class="comment">// age, 12</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h2><h3 id="定义-3"><a href="#定义-3" class="headerlink" title="定义"></a>定义</h3><p>WeakMap与Map结构类似，区别在于：</p>
+<ol>
+<li><p>WeakMap只接收对象作为键名(不接受null)，不接受其他类型。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> <span class="built_in">WeakMap</span>();</div><div class="line">m.set(<span class="number">1</span>, <span class="number">2</span>);</div><div class="line"><span class="comment">//TypeError</span></div><div class="line">m.set(<span class="literal">null</span>, <span class="number">1</span>);</div><div class="line"><span class="comment">//TypeError</span></div><div class="line">m.set(&#123;<span class="attr">age</span>: <span class="number">1</span>&#125;, <span class="number">2</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>WeakMap的键名指向的对象都是弱引用，不计入垃圾回收机制。因此，只要所引用的对象的其他引用都被清除，垃圾回收机制就会释放这个对象占用的内存。</p>
+</li>
+</ol>
+<h3 id="用法-2"><a href="#用法-2" class="headerlink" title="用法"></a>用法</h3><p>WeakMap只有4个方法：get(), set(), has(), delete()。</p>
+<p>WeakMap没有size属性，不可遍历。</p>
+
       
     </div>
 
@@ -621,7 +673,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set"><span class="nav-number">1.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用法"><span class="nav-number">1.2.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例的属性和方法"><span class="nav-number">1.3.</span> <span class="nav-text">实例的属性和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性"><span class="nav-number">1.3.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法"><span class="nav-number">1.3.2.</span> <span class="nav-text">方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WeakSet"><span class="nav-number">2.</span> <span class="nav-text">WeakSet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义-1"><span class="nav-number">2.1.</span> <span class="nav-text">定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">3.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WeakMap"><span class="nav-number">4.</span> <span class="nav-text">WeakMap</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set"><span class="nav-number">1.</span> <span class="nav-text">Set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用法"><span class="nav-number">1.2.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例的属性和方法"><span class="nav-number">1.3.</span> <span class="nav-text">实例的属性和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性"><span class="nav-number">1.3.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法"><span class="nav-number">1.3.2.</span> <span class="nav-text">方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WeakSet"><span class="nav-number">2.</span> <span class="nav-text">WeakSet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义-1"><span class="nav-number">2.1.</span> <span class="nav-text">定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">3.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义-2"><span class="nav-number">3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用法-1"><span class="nav-number">3.2.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例的属性和方法-1"><span class="nav-number">3.3.</span> <span class="nav-text">实例的属性和方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遍历方法"><span class="nav-number">3.4.</span> <span class="nav-text">遍历方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WeakMap"><span class="nav-number">4.</span> <span class="nav-text">WeakMap</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义-3"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用法-2"><span class="nav-number">4.2.</span> <span class="nav-text">用法</span></a></li></ol></li></ol></div>
             
 
           </div>
